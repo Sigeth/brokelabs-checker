@@ -12,9 +12,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Sigeth/opslab-core-go/api/v1alpha1"
+	"github.com/Sigeth/brokelabs-core-go/api/v1alpha1"
 
-	"github.com/Sigeth/opslab-checker/pkg/sdk"
+	"github.com/Sigeth/brokelabs-checker/pkg/sdk"
 )
 
 const (

@@ -15,10 +15,10 @@ import (
 	"testing"
 	"testing/fstest"
 
-	"github.com/Sigeth/opslab-core-go/api/v1alpha1"
-	"github.com/Sigeth/opslab-core-go/pkg/checkerio"
+	"github.com/Sigeth/brokelabs-core-go/api/v1alpha1"
+	"github.com/Sigeth/brokelabs-core-go/pkg/checkerio"
 
-	"github.com/Sigeth/opslab-checker/pkg/sdk"
+	"github.com/Sigeth/brokelabs-checker/pkg/sdk"
 )
 
 // newServer starts an HTTP server and returns its host and port.
@@ -47,7 +47,7 @@ func closedPort(t *testing.T) int32 {
 }
 
 func manifest(port, closed int32) string {
-	return `apiVersion: opslab.io/v1alpha1
+	return `apiVersion: brokelabs.io/v1alpha1
 kind: ChallengePackage
 metadata: {name: web, version: 0.1.0}
 spec:

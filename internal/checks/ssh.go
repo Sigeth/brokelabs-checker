@@ -8,18 +8,18 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Sigeth/opslab-core-go/api/v1alpha1"
-	"github.com/Sigeth/opslab-core-go/pkg/checkerio"
-	"github.com/Sigeth/opslab-core-go/pkg/kubeexec"
-	"github.com/Sigeth/opslab-core-go/pkg/sshexec"
+	"github.com/Sigeth/brokelabs-core-go/api/v1alpha1"
+	"github.com/Sigeth/brokelabs-core-go/pkg/checkerio"
+	"github.com/Sigeth/brokelabs-core-go/pkg/kubeexec"
+	"github.com/Sigeth/brokelabs-core-go/pkg/sshexec"
 
-	"github.com/Sigeth/opslab-checker/pkg/sdk"
+	"github.com/Sigeth/brokelabs-checker/pkg/sdk"
 )
 
 // sudoMarker is printed to stderr from inside sudo before the command runs.
 // Without it, sudo itself failed (the student revoked the checker's rights):
 // its exit code must not be taken for the command's.
-const sudoMarker = "opslab-checker: sudo ok"
+const sudoMarker = "brokelabs-checker: sudo ok"
 
 // runSSH runs cmd on a vm machine: the checker user logs in with its key,
 // the machine's host key pinned, and runs cmd as user through sudo.

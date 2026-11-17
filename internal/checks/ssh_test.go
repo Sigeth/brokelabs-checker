@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Sigeth/opslab-core-go/api/v1alpha1"
-	"github.com/Sigeth/opslab-core-go/pkg/checkerio"
-	"github.com/Sigeth/opslab-core-go/pkg/sshexec"
+	"github.com/Sigeth/brokelabs-core-go/api/v1alpha1"
+	"github.com/Sigeth/brokelabs-core-go/pkg/checkerio"
+	"github.com/Sigeth/brokelabs-core-go/pkg/sshexec"
 
-	"github.com/Sigeth/opslab-checker/pkg/sdk"
+	"github.com/Sigeth/brokelabs-checker/pkg/sdk"
 )
 
 // fakeVM answers SSH commands like a machine where sudo works (or not).
@@ -44,7 +44,7 @@ func vmTarget(t *testing.T) checkerio.Target {
 		}
 	}
 	return checkerio.Target{
-		Runtime: v1alpha1.RuntimeVM, Host: "box.inst-x.svc", SSHPort: 22, SSHUser: "opslab-checker",
+		Runtime: v1alpha1.RuntimeVM, Host: "box.inst-x.svc", SSHPort: 22, SSHUser: "brokelabs-checker",
 		SSHPrivateKeyFile:     filepath.Join(dir, "checker"),
 		StudentPrivateKeyFile: filepath.Join(dir, "student"),
 		SSHKnownHostsFile:     filepath.Join(dir, "known_hosts"),
@@ -69,7 +69,7 @@ func TestShellOverSSH(t *testing.T) {
 		t.Fatalf("result = %+v", res)
 	}
 	req := vm.reqs[0]
-	if req.Addr != "box.inst-x.svc:22" || req.User != "opslab-checker" || string(req.PrivateKey) != "CHECKER KEY" || !strings.HasPrefix(string(req.KnownHosts), "box.inst-x.svc ") {
+	if req.Addr != "box.inst-x.svc:22" || req.User != "brokelabs-checker" || string(req.PrivateKey) != "CHECKER KEY" || !strings.HasPrefix(string(req.KnownHosts), "box.inst-x.svc ") {
 		t.Fatalf("request = %+v", req)
 	}
 	want := `'sudo' '-n' '-u' 'root' '--' '/bin/sh' '-c' 'echo '\''` + sudoMarker + `'\'' >&2; exec "$@"' 'sh' '/bin/sh' '-c' 'sshd -T | grep -i permitrootlogin'`

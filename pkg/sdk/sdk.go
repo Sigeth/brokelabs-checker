@@ -1,5 +1,5 @@
 // Package sdk runs checkers. It implements the checker contract of
-// github.com/Sigeth/opslab-core-go/pkg/checkerio so a checker only has to
+// github.com/Sigeth/brokelabs-core-go/pkg/checkerio so a checker only has to
 // decide whether one task passes.
 //
 // The built-in checker uses it, and so can custom checkers written in Go:
@@ -23,14 +23,14 @@ import (
 	"slices"
 	"time"
 
-	"github.com/Sigeth/opslab-core-go/api/v1alpha1"
-	"github.com/Sigeth/opslab-core-go/pkg/challenge"
-	"github.com/Sigeth/opslab-core-go/pkg/checkerio"
+	"github.com/Sigeth/brokelabs-core-go/api/v1alpha1"
+	"github.com/Sigeth/brokelabs-core-go/pkg/challenge"
+	"github.com/Sigeth/brokelabs-core-go/pkg/checkerio"
 )
 
 // DefaultPackageDir is where the operator mounts the package files when
 // checkerio.EnvPackageDir is not set.
-const DefaultPackageDir = "/opslab/package"
+const DefaultPackageDir = "/brokelabs/package"
 
 // TaskTimeout bounds the time spent checking one task.
 const TaskTimeout = 30 * time.Second

@@ -1,9 +1,9 @@
-module github.com/Sigeth/opslab-checker
+module github.com/Sigeth/brokelabs-checker
 
 go 1.27.0
 
 require (
-	github.com/Sigeth/opslab-core-go v0.8.0
+	github.com/Sigeth/brokelabs-core-go v0.9.0
 	k8s.io/client-go v0.37.2
 )
 

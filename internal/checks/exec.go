@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Sigeth/opslab-core-go/api/v1alpha1"
-	"github.com/Sigeth/opslab-core-go/pkg/checkerio"
-	"github.com/Sigeth/opslab-core-go/pkg/kubeexec"
+	"github.com/Sigeth/brokelabs-core-go/api/v1alpha1"
+	"github.com/Sigeth/brokelabs-core-go/pkg/checkerio"
+	"github.com/Sigeth/brokelabs-core-go/pkg/kubeexec"
 
-	"github.com/Sigeth/opslab-checker/pkg/sdk"
+	"github.com/Sigeth/brokelabs-checker/pkg/sdk"
 )
 
 // maxFileSize bounds the content read by file checks.

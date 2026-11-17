@@ -8,11 +8,11 @@ import (
 
 	"k8s.io/client-go/rest"
 
-	"github.com/Sigeth/opslab-core-go/pkg/kubeexec"
-	"github.com/Sigeth/opslab-core-go/pkg/sshexec"
+	"github.com/Sigeth/brokelabs-core-go/pkg/kubeexec"
+	"github.com/Sigeth/brokelabs-core-go/pkg/sshexec"
 
-	"github.com/Sigeth/opslab-checker/internal/checks"
-	"github.com/Sigeth/opslab-checker/pkg/sdk"
+	"github.com/Sigeth/brokelabs-checker/internal/checks"
+	"github.com/Sigeth/brokelabs-checker/pkg/sdk"
 )
 
 func main() {
