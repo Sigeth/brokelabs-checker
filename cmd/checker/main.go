@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	c := &checks.Checker{SSH: sshexec.New(), Login: sshexec.Login}
+	c := &checks.Checker{SSH: sshexec.New(), Login: sshexec.Login, Kube: checks.Kubeconfig}
 	// In the cluster, the operator grants the checker exec into the machines.
 	if config, err := rest.InClusterConfig(); err == nil {
 		exec, err := kubeexec.New(config)

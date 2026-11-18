@@ -24,6 +24,8 @@ type Checker struct {
 	SSH sshexec.Executor
 	// Login attempts SSH logins (sshLogin checks): sshexec.Login.
 	Login func(context.Context, sshexec.Request) (bool, error)
+	// Kube connects to virtual clusters (kubeCEL checks): Kubeconfig.
+	Kube KubeClients
 }
 
 // Check dispatches a task to the implementation of its check type. It is an
@@ -49,7 +51,7 @@ func (ch *Checker) Check(ctx context.Context, env *sdk.Env, task v1alpha1.Task) 
 	case c.SSHLogin != nil:
 		return ch.sshLogin(ctx, target, c.Machine, c.SSHLogin)
 	case c.KubeCEL != nil:
-		return sdk.Result{}, fmt.Errorf("kubeCEL: %w", ErrUnsupported)
+		return ch.kubeCEL(ctx, target, c.Machine, c.KubeCEL)
 	case c.Goss != nil:
 		return sdk.Result{}, fmt.Errorf("goss: %w", ErrUnsupported)
 	}

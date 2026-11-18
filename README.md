@@ -15,7 +15,7 @@ The operator runs the checker as a Job **outside** the student's machines. The c
 | `http` | ✅ |
 | `shell`, `file` | ✅ on `pod` machines (Kubernetes exec) and `vm` machines (SSH) |
 | `sshLogin` | ✅ on `vm` machines |
-| `kubeCEL` | M4 |
+| `kubeCEL` | ✅ on `vcluster` machines (Kubernetes CEL, as in ValidatingAdmissionPolicy) |
 | `goss` | later |
 
 An unsupported check type is reported as a checker **error**, never as a failed task.
