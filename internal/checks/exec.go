@@ -18,7 +18,9 @@ import (
 const maxFileSize = 1 << 20
 
 // run executes a command on a machine: in the container of pod machines (as
-// the container user), over SSH on vm machines (as user, root when empty).
+// the container user), of userns machines (as user through su, root when
+// empty: the container runs as root), over SSH on vm machines (as user, root
+// when empty).
 // When the machine cannot be reached (the student deleted it, broke sshd or
 // the checker's access...), the task fails: a check never passes without
 // evidence.
@@ -32,11 +34,15 @@ func (c *Checker) run(ctx context.Context, target checkerio.Target, machine, use
 	if c.Exec == nil {
 		return kubeexec.Result{}, nil, fmt.Errorf("machine %s: no Kubernetes access to run commands", machine)
 	}
+	command := cmd
+	if target.Runtime == v1alpha1.RuntimeUserns {
+		command = kubeexec.AsUser(user, cmd)
+	}
 	res, err := c.Exec.Exec(ctx, kubeexec.Request{
 		Namespace: target.Namespace,
 		Pod:       target.Pod,
 		Container: target.Container,
-		Command:   cmd,
+		Command:   command,
 	})
 	if err != nil {
 		if ctx.Err() != nil {

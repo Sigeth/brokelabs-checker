@@ -13,7 +13,7 @@ The operator runs the checker as a Job **outside** the student's machines. The c
 |---|---|
 | `port` (tcp) | ✅ |
 | `http` | ✅ |
-| `shell`, `file` | ✅ on `pod` machines (Kubernetes exec) and `vm` machines (SSH) |
+| `shell`, `file` | ✅ on `pod` machines (Kubernetes exec, as the container user), `userns` machines (exec, as the check's user through `su`) and `vm` machines (SSH) |
 | `sshLogin` | ✅ on `vm` machines |
 | `kubeCEL` | ✅ on `vcluster` machines (Kubernetes CEL, as in ValidatingAdmissionPolicy) |
 | `goss` | later |

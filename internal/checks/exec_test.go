@@ -121,3 +121,25 @@ func TestUnreachableMachineFails(t *testing.T) {
 		t.Fatalf("got %+v", res)
 	}
 }
+
+func TestUsernsChecksRunAsTheirUser(t *testing.T) {
+	target := checkerio.Target{Runtime: v1alpha1.RuntimeUserns, Namespace: "inst-x", Pod: "box", Container: "machine"}
+	env := &sdk.Env{Targets: &checkerio.Targets{Machines: map[string]checkerio.Target{"box": target}}}
+	for _, tt := range []struct {
+		user string
+		want []string
+	}{
+		{"", []string{"/bin/sh", "-c", "id -u"}},     // root: the container user
+		{"root", []string{"/bin/sh", "-c", "id -u"}}, // same
+		{"student", []string{"su", "-s", "/bin/sh", "student", "-c", "'/bin/sh' '-c' 'id -u'"}},
+	} {
+		m := &fakeMachine{}
+		c := v1alpha1.Check{Machine: "box", Shell: &v1alpha1.ShellCheck{Run: "id -u", User: tt.user}}
+		if _, err := (&Checker{Exec: m}).Check(context.Background(), env, v1alpha1.Task{ID: "t", Check: &c}); err != nil {
+			t.Fatal(err)
+		}
+		if got := m.cmds[0]; strings.Join(got, "|") != strings.Join(tt.want, "|") {
+			t.Errorf("user %q: command = %q, want %q", tt.user, got, tt.want)
+		}
+	}
+}
